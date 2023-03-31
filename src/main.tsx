@@ -11,6 +11,7 @@ import ArtriNavbar from './MainSection/components/Navbar/ArtriNavbar';
 import GamePage from './MainSection/pages/Game/GamePage';
 import HomePage from './MainSection/pages/Home/HomePage';
 import PracticeLevelPage from './MainSection/pages/PracticeLevel/PracticeLevelPage';
+import StatisticsPage from './MainSection/pages/Statistics/StatisticsPage';
 
 
 
@@ -68,7 +69,13 @@ path:"/artri",
     {
         path:"/artri/game",
         element:<GamePage />
-    }]
+    },
+      {
+        path:"/artri/statistics",
+        element:<StatisticsPage />
+      }
+    
+    ]
 
     }]
   }

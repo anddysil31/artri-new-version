@@ -4,3 +4,15 @@
     position: absolute;
     
 }
+
+.startButton{
+    margin-left: 50em;
+    margin-top: 20em;
+    position: absolute;
+    width: 4em;
+    height: 4em;
+}
+
+.startIcon{
+    font-size: xx-large;
+}

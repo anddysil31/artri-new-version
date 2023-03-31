@@ -5,14 +5,15 @@ import React, { useState, useEffect } from 'react';
 import { BALL_TO_NOTE, NOTES, VALID_NOTES } from './notes/constantNotes';
 
 const BallKeyboard = () => {
-  //State about 
   const [pressedBall, setPressedBall] = useState<string[]>([]);
 
   const playNote = (note: any) => {
     if (!_.isEmpty(note)) {
       const noteAudio = new Audio(`/src/MainSection/notes/${note}.mp3`);
-      noteAudio.play();
+      noteAudio.play()
+      return
     }
+  
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -22,10 +23,11 @@ const BallKeyboard = () => {
     const note = event.key;
     const updatedPressedBalls = [...pressedBall];
     if (!updatedPressedBalls.includes(note) && VALID_NOTES.includes(note)) {
-      updatedPressedBalls.push(note);
+      updatedPressedBalls.push(note);   
+      playNote(BALL_TO_NOTE[note]);
     }
     setPressedBall(updatedPressedBalls);
-    playNote(BALL_TO_NOTE[note]);
+ 
   };
 
   const handleKeyUp = (event: KeyboardEvent) => {

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-// import { statistics } from "../../../service/Address copy/StatisticsService/StatisticsService"
+
+const statisticsURL = "htpp://localhost:8081/api/statistics"
 
 interface PlayerProps{
     score:number
@@ -16,13 +17,16 @@ export default function PlayerSaveData( {score}:PlayerProps){
         memberId:1
     }
     const saveData = async() =>{
-        // axios.post(statistics, data).then(response => {console.log(response)})
-        // .catch(err => console.log(err))
+    try{
+        await axios.post(statisticsURL, data)
+    } catch (err){
+        console.error(err)
+    }
     }
    return(
-    <div>
+    <div style={{ fontSize:'80px', position:'absolute', marginLeft:'2ex'}}>
         {score}
-        {/* <button onClick={saveData}>Save</button> */}
+        <button onClick={saveData}>Guardar</button>
     </div>
    )
 

@@ -4,6 +4,7 @@ import PlayerStats from "../PlayerStats/PlayerStats";
 import data from "../../../../../../data";
 import "./styles/NotesDown.css";
 import PlayerSaveData from "../PlayerStats/PlayerSaveData";
+import { PlayCircleOutlined } from "@ant-design/icons";
 
 let { player } = data;
 const NotesDown = () => {
@@ -34,30 +35,30 @@ const NotesDown = () => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
         event.key === "a" &&
-        blue.y > 200 - 90 &&
-        blue.y < 200 + 70
+        blue.y > canvas.height - 200 &&
+        blue.y < canvas.height - 30
       ) {
-        setScore((score) => score + 1); 
+        setScore((score) => score + 10); 
         ctx?.clearRect(0, 0, ctx.canvas?.width, ctx.canvas?.height);
       }
       if (
         event.key === "s" &&
-        red.y > 200 - 90 &&
-        red.y < 200 + 70
+        red.y > canvas.height - 200 &&
+        red.y < canvas.height - 30
       ) {
         setScore((score) => score + 10);
       }
       if (
         event.key === "d" &&
-        orange.y > 200 - 90 &&
-        orange.y < 200 + 70
+        orange.y > canvas.height -200 &&
+        orange.y < canvas.height - 30
       ) {
         setScore((score) => score + 10);
       }
       if (
         event.key === "f" &&
-        yellow.y > 200 - 90 &&
-        yellow.y < 200 + 70
+        yellow.y > canvas.height - 200 &&
+        yellow.y < canvas.height - 30
       ) {
         setScore((score) => score + 10);
       }
@@ -80,7 +81,9 @@ const NotesDown = () => {
       }
       if (yellow.y > canvas.height + 1000) {
         setScore(player.score);
+        setStartGame(false)
       }
+
 
       PlayerStats(ctx, player, canvas);
       animationFrameId = window.requestAnimationFrame(render);
@@ -97,9 +100,13 @@ const NotesDown = () => {
   return (
     <div>
       <canvas ref={canvasRef} className="gameNotes" />
-      <PlayerSaveData score={score}/>
-      <button onClick={()=>setStartGame(true)} style={{marginLeft:'340px'}}>Jugar</button> 
-    </div>
+      <PlayerSaveData score={score} />
+      {(!startGame)&&
+      <button onClick={()=>setStartGame(true) } className='startButton'>
+        <p className="startIcon"><PlayCircleOutlined /></p>
+      </button> 
+      }
+      </div>
   );
 };
 
