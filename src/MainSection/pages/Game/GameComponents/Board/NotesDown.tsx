@@ -10,6 +10,7 @@ let { player } = data;
 const NotesDown = () => {
   const [score, setScore] = useState(0); // UseState for manage the score
   const [startGame, setStartGame] = useState(false) //Manage the start and end game
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   let blue = new MovNotes(160, 0, canvasRef);
@@ -65,9 +66,12 @@ const NotesDown = () => {
     };
 
     let animationFrameId: any;
-
+    const song = new Audio(`/src/MainSection/notes/ForElisa.mp3`);
     document.addEventListener("keydown", handleKeyDown, true);
     if(startGame) {
+          song.play()
+      
+      
     const render = () => {
       blue.draw(ctx, "blue", 2);
       if (blue.y > canvas.height + 120) {
@@ -77,13 +81,14 @@ const NotesDown = () => {
         orange.draw(ctx, "orange", 2);
       }
       if (orange.y > canvas.height + 70) {
-        yellow.draw(ctx, "yellow", 2);
+        yellow.draw(ctx, "yellow", 3);
       }
       if (yellow.y > canvas.height + 1000) {
         setScore(player.score);
-        setStartGame(false)
+        setStartGame(false);
+        song.pause();
       }
-
+      
 
       PlayerStats(ctx, player, canvas);
       animationFrameId = window.requestAnimationFrame(render);
@@ -96,7 +101,7 @@ const NotesDown = () => {
       document.addEventListener("keydown", handleKeyDown, true);
     };
   }, [startGame]);
-
+ 
   return (
     <div>
       <canvas ref={canvasRef} className="gameNotes" />
@@ -114,5 +119,6 @@ NotesDown.defaultProps = {
   width: 1000,
   height: 1000,
 };
+
 
 export default NotesDown;

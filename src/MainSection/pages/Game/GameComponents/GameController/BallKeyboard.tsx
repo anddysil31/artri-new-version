@@ -10,7 +10,7 @@ const BallKeyboard = () => {
   const playNote = (note: any) => {
     if (!_.isEmpty(note)) {
       const noteAudio = new Audio(`/src/MainSection/notes/${note}.mp3`);
-      noteAudio.play()
+      // noteAudio.play()
       return
     }
   

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, DatePicker, Divider, Form, Input, TimePicker } from 'antd';
+import { Button, Divider, Form, Input, message } from 'antd';
 import PhraseRegister from './PhraseRegister';
+import axios from 'axios';
 
-const { RangePicker } = DatePicker;
 
 const formItemLayout = {
   labelCol: {
@@ -16,22 +16,19 @@ const formItemLayout = {
 };
 
 const config = {
-  rules: [{ type: 'object' as const, required: true, message: 'Please select time!' }],
+  rules :[{required: true, message:'Por favor llene el campo' }],
 };
 
-const rangeConfig = {
-  rules: [{ type: 'array' as const, required: true, message: 'Please select time!' }],
-};
 
-const onFinish = (fieldsValue: any) => {
-  // Should format date value before submit.
-  const rangeValue = fieldsValue['range-picker'];
-  const values = {
-    ...fieldsValue,
-    'date-picker': fieldsValue['date-picker'].format('YYYY-MM-DD'),
-  };
-  console.log('Received values of form: ', values);
-};
+const onFinish = async (fieldsValue: any) => {
+    try{
+      await axios.post("http://localhost:8081/api/v1/auth/register", fieldsValue)
+    }catch(err){
+      console.error(err)
+    }
+}
+
+
 
 const RegisterForm: React.FC = () => (
     <div>
@@ -43,7 +40,7 @@ const RegisterForm: React.FC = () => (
     onFinish={onFinish}
     style={{ maxWidth: 600 }}
   >
-    <Form.Item name="username" label="Nickname" {...config}>
+    <Form.Item name="nickname" label="Nickname" {...config}>
         <Input />
     </Form.Item>
 
@@ -55,13 +52,10 @@ const RegisterForm: React.FC = () => (
         <Input />
     </Form.Item>
 
-    <Form.Item name="username" label="Nickname" {...config}>
-        <Input />
-    </Form.Item>
-
-    
-    <Form.Item name="date-picker" label="Fecha de Nacimiento" {...config}>
-      <DatePicker />
+    <Form.Item name="age" label="Edad" {...config}>
+      <Input 
+      type='number'
+      />
     </Form.Item>
 
     <Form.Item name="email" label="Email" rules={[{type:'email', required : true}] }>
@@ -71,6 +65,11 @@ const RegisterForm: React.FC = () => (
     <Form.Item name="password" label="Contraseña" {...config}>
         <Input 
          type="password"/>
+    </Form.Item>
+
+    <Form.Item name="role" label="Rol" {...config}>
+        <Input 
+         type="number"/>
     </Form.Item>
 
     <Form.Item wrapperCol={{ xs: { span: 24, offset: 0 }, sm: { span: 16, offset: 8 } }}>

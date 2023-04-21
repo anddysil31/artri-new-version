@@ -1,22 +1,21 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import data from '../../../../data'
 
-const statisticsURL = 'http://localhost:8081/api/statistics'
+
+const statisticsURL = 'http://localhost:8081/api/statistics/member'
 export default function StatisticsPage() {
     const [listStatistics, setListStatistics] = useState<String[]>([])
-    const GetStatistics = async(e:Event) => {
-        e.preventDefault()
+    const GetStatistics = async() => {
         try{
-            const response = await axios.get(statisticsURL)
-            console.log(response.data)
+            await axios.get(statisticsURL).
+            then(results =>setListStatistics(results.data))
         }catch(err){
             console.error(err)
         }
     }
 
     useEffect(()=>{
-        GetStatistics
+        GetStatistics()
     },[])
   return (
 
