@@ -8,7 +8,9 @@ import PrivateRoute from './HomeSection/pages/Login/components/PrivateRoute';
 import Login from "./HomeSection/pages/Login/Login";
 import Register from "./HomeSection/pages/Register/Register";
 import ArtriNavbar from './MainSection/components/Navbar/ArtriNavbar';
+import ChopinGame from './MainSection/pages/Game/ChopinGame';
 import GamePage from './MainSection/pages/Game/GamePage';
+import MozartGame from './MainSection/pages/Game/MozartGame';
 import HomePage from './MainSection/pages/Home/HomePage';
 import PracticeLevelPage from './MainSection/pages/PracticeLevel/PracticeLevelPage';
 import StatisticsPage from './MainSection/pages/Statistics/StatisticsPage';
@@ -67,9 +69,17 @@ path:"/artri",
       
       },
     {
-        path:"/artri/game",
+        path:"/artri/game/1",
         element:<GamePage />
     },
+    {
+      path:"/artri/game/2",
+      element:<ChopinGame />
+  },
+  {
+    path:"/artri/game/3",
+    element:<MozartGame />
+},
       {
         path:"/artri/statistics",
         element:<StatisticsPage />

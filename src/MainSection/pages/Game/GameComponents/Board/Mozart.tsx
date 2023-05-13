@@ -13,7 +13,7 @@ if(newDataUser === null){
   'userId':0
   }
 }
-const NotesDown = () => {
+const MozartNotesDown = () => {
   const player = newDataUser.username
   const memberId = newDataUser.userId
   const [score, setScore] = useState(0); // UseState for manage the score
@@ -96,7 +96,7 @@ const NotesDown = () => {
   return (
     <div>
       <canvas ref={canvasRef} className="gameNotes" />
-      <PlayerSaveData score={score} songId={1} memberId={memberId} />
+      <PlayerSaveData score={score} songId={3} memberId={memberId} />
       {(!startGame)&&
       <button onClick={()=>setStartGame(true) } className='startButton'>
         <p className="startIcon"><PlayCircleOutlined /></p>
@@ -106,10 +106,10 @@ const NotesDown = () => {
   );
 };
 
-NotesDown.defaultProps = {
+MozartNotesDown.defaultProps = {
   width: 1000,
   height: 1000,
 };
 
 
-export default NotesDown;
+export default MozartNotesDown;

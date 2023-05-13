@@ -2,36 +2,37 @@ import React from 'react';
 import { Button, Divider, Form, Input, message } from 'antd';
 import PhraseRegister from './PhraseRegister';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-  },
-};
-
-const config = {
-  rules :[{required: true, message:'Por favor llene el campo' }],
-};
-
-
-const onFinish = async (fieldsValue: any) => {
-    try{
-      await axios.post("http://localhost:8081/api/v1/auth/register", fieldsValue)
-    }catch(err){
-      console.error(err)
-    }
-}
-
-
-
-const RegisterForm: React.FC = () => (
-    <div>
+const RegisterForm: React.FC = () => {
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 },
+    },
+  };
+  
+  const config = {
+    rules :[{required: true, message:'Por favor llene el campo' }],
+  };
+  
+  const registernavigate = useNavigate()
+  const onFinish = async (fieldsValue: any) => {
+      try{
+        await axios.post("http://localhost:8081/api/v1/auth/register", fieldsValue)
+        alert('Registro exitoso')
+        registernavigate("/login")
+      }catch(err){
+        console.error(err)
+      }
+  }
+  return(
+  <div>
         <PhraseRegister />
     <Divider />
   <Form
@@ -78,7 +79,7 @@ const RegisterForm: React.FC = () => (
       </Button>
     </Form.Item>
   </Form>
-  </div>
-);
+  </div>)
+};
 
 export default RegisterForm;

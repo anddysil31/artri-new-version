@@ -7,14 +7,14 @@ import { BALL_TO_NOTE, NOTES, VALID_NOTES } from './notes/constantNotes';
 const BallKeyboard = () => {
   const [pressedBall, setPressedBall] = useState<string[]>([]);
 
-  const playNote = (note: any) => {
-    if (!_.isEmpty(note)) {
-      const noteAudio = new Audio(`/src/MainSection/notes/${note}.mp3`);
-      // noteAudio.play()
-      return
-    }
+  // const playNote = (note: any) => {
+  //   if (!_.isEmpty(note)) {
+  //  const noteAudio = new Audio(`/src/MainSection/notes/${note}.mp3`);
+  //     // noteAudio.play()
+  //     return
+  //   }
   
-  };
+  // };
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.repeat) {
@@ -24,7 +24,7 @@ const BallKeyboard = () => {
     const updatedPressedBalls = [...pressedBall];
     if (!updatedPressedBalls.includes(note) && VALID_NOTES.includes(note)) {
       updatedPressedBalls.push(note);   
-      playNote(BALL_TO_NOTE[note]);
+      // playNote(BALL_TO_NOTE[note]);
     }
     setPressedBall(updatedPressedBalls);
  
@@ -50,16 +50,16 @@ const BallKeyboard = () => {
     return <BallKey key={index} note={note} pressedBall={pressedBall} />;
   });
 
-  const audioFiles = _.map(NOTES, (note, index) => {
-    return (
-      <audio id={note} key={index} />
-    );
-  });
+  // const audioFiles = _.map(NOTES, (note, index) => {
+  //   return (
+  //     <audio id={note} key={index} />
+  //   );
+  // });
 
   return (
     <div>
       <div className='ballKeyboard'>{keys}</div>
-      <div>{audioFiles}</div>
+      {/* <div>{audioFiles}</div> */}
     </div>
   );
 };

@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Divider, Form, Input } from 'antd';
 import Phrase from './Phrase';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const LoginForm: React.FC = () => {
   const [loading, setLoading] = useState(false)
+
   const navigate = useNavigate()
   const onFinish = async(values: any) => {
     try{
       setLoading(true)
       const response = await axios.post("http://localhost:8081/api/v1/auth/authenticate",
       values);
-      const token = response.data.token
+      const token = response.data.token;
+      const dataUser = {
+      'username' : response.data.username,
+      'userId' : response.data.userId 
+    }
+      localStorage.setItem('dataUser', JSON.stringify(dataUser))
       localStorage.setItem("token", token);
+     
       navigate("/artri")
 
     }catch(err){
       console.error()
+      alert("Registro no encontrado")
     } finally{
       setLoading(false)
     }

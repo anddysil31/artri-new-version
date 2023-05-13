@@ -1,20 +1,22 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-const statisticsURL = "htpp://localhost:8081/api/statistics"
+const statisticsURL = "htpp://localhost:8081/api/v1/statistics"
 
 interface PlayerProps{
     score:number
+    songId:number
+    memberId:number
 }
 
-export default function PlayerSaveData( {score}:PlayerProps){
+export default function PlayerSaveData( {score,songId, memberId}:PlayerProps){
     
     const fecha = new Date()
     const data ={
         date:fecha,
         score:score,
-        songId:1,
-        memberId:1
+        songId:songId,
+        memberId:memberId
     }
     const saveData = async() =>{
     try{
@@ -24,9 +26,9 @@ export default function PlayerSaveData( {score}:PlayerProps){
     }
     }
    return(
-    <div style={{ fontSize:'80px', position:'absolute', marginLeft:'2ex'}}>
+    <div style={{ fontSize:'80px', position:'absolute', marginLeft:'2.5ex', marginTop:'0.5ex'}}>
         {score}
-        <button onClick={saveData}>Guardar</button>
+        <button onClick={saveData} style={{ fontSize:'22px'}}>Guardar</button>
     </div>
    )
 

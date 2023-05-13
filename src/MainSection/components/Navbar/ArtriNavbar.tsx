@@ -1,9 +1,14 @@
 import { BarChartOutlined, HomeOutlined, LogoutOutlined, MenuUnfoldOutlined, PlayCircleOutlined, SettingOutlined } from '@ant-design/icons'
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import "./styles/ArtriNavbar.css";
 
 export default function ArtriNavbar() {
+  const exit = useNavigate()
+  const logout = () => {
+    localStorage.clear()
+    exit('/')
+  }
   return (
     <div>
       
@@ -20,7 +25,7 @@ export default function ArtriNavbar() {
                   
                   <li className='link-item-artri'><Link to = "/artri/statistics"><BarChartOutlined /></Link></li>
                   <li className='link-item-artri'><Link to = "/artri/settings"><SettingOutlined /></Link></li>
-                  <li className='link-item-artri'><Link to = "/artri/logout"><LogoutOutlined /></Link></li>
+                  <li className='link-item-artri' onClick={logout}><LogoutOutlined /></li>
               </ul>
            
       </nav>
