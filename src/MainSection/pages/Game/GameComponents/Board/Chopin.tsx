@@ -60,7 +60,7 @@ const ChopinNotesDown = () => {
     ctx?.clearRect(0,0, ctx.canvas?.width, ctx.canvas?.height)
   }
     let animationFrameId: any;
-    const song = new Audio(`/src/MainSection/notes/ForElisa.mp3`);
+    const song = new Audio(`/src/MainSection/notes/WaltzinAminor.mp3`);
     document.addEventListener("keydown", handleKeyDown, true);
     if(startGame) {
           song.play()

@@ -6,16 +6,11 @@ import "./styles/NotesDown.css";
 import PlayerSaveData from "../PlayerStats/PlayerSaveData";
 import { PlayCircleOutlined } from "@ant-design/icons";
 
-let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
-if(newDataUser === null){
-  newDataUser = {
-  'username':'DefaultValue',
-  'userId':0
-  }
-}
+
 const NotesDown = () => {
-  const player = newDataUser.username
+  let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
   const memberId = newDataUser.userId
+  const player = newDataUser.username
   const [score, setScore] = useState(0); // UseState for manage the score
   const [startGame, setStartGame] = useState(false) //Manage the start and end game
   const canvasRef = useRef<HTMLCanvasElement>(null);

@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-const statisticsURL = "htpp://localhost:8081/api/v1/statistics"
+const statisticsURL = "http://localhost:8081/api/v1/statistics"
 
 interface PlayerProps{
     score:number
@@ -11,7 +11,8 @@ interface PlayerProps{
 
 export default function PlayerSaveData( {score,songId, memberId}:PlayerProps){
     
-    const fecha = new Date()
+    const fecha = new Date().toISOString()
+
     const data ={
         date:fecha,
         score:score,

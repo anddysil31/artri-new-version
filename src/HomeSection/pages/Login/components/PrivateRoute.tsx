@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Navigate, Outlet} from 'react-router-dom'
+interface Security{
+    token: boolean,
+    redirectTo: string,
+    
+}
 
-export default function PrivateRoute({component:Component, ...rest}:any) {
-    const [auth, setAuth ] = useState(false) 
-    const navigate = useNavigate()
-    useEffect (() =>{
-        const token = localStorage.getItem("token")
-        if(token){
-            setAuth(true)
-        }
-    }, [])
-  return (
-    <Routes>
+export default function PrivateRoute({token, redirectTo}:Security, {children}:any) {
+    if(!token){
+        return <Navigate to={redirectTo}/>   
+    }
 
-        <Route
-        {...rest}
-        render={(props:any)=>{
-            auth ? <Component {...props} /> : navigate("/login")
-        }}
-        ></Route>
-    </Routes>
-  )
+    return <>{children ? children : <Outlet/>}</>
 }

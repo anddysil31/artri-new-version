@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import '../styles/PhraseRegister.css'
 
 export default function PhraseRegister() {
@@ -10,7 +11,7 @@ export default function PhraseRegister() {
             ¿Ya tienes una cuenta?
             </h3>
             <h3 style={{marginLeft:'10px'}}>
-                Inicia Sesión
+                <Link to="/artri/login">Inicia Sesión</Link>
             </h3>
 
         </div>

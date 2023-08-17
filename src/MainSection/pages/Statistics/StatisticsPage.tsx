@@ -11,8 +11,11 @@ interface StView{
     song: string;     
 }
 
-const statisticsURL = 'http://localhost:8081/api/v1/statistics/member'
+
 export default function StatisticsPage() {
+    let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
+
+    const statisticsURL = `http://localhost:8081/api/v1/statistics/member/${newDataUser.userId}`
     const [listStatistics, setListStatistics] = useState<StView[]>([])
     const GetStatistics = async() => {
         try{
@@ -25,7 +28,7 @@ export default function StatisticsPage() {
 
     useEffect(()=>{
         GetStatistics()
-    },[GetStatistics()])
+    },[listStatistics])
   return (
     <div className='table-container'>
         

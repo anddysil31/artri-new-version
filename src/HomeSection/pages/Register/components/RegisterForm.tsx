@@ -26,7 +26,7 @@ const RegisterForm: React.FC = () => {
       try{
         await axios.post("http://localhost:8081/api/v1/auth/register", fieldsValue)
         alert('Registro exitoso')
-        registernavigate("/login")
+        registernavigate("artri/login")
       }catch(err){
         console.error(err)
       }

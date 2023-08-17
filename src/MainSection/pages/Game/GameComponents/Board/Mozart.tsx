@@ -20,7 +20,6 @@ const MozartNotesDown = () => {
   const [startGame, setStartGame] = useState(false) //Manage the start and end game
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  console.log(newDataUser)
   const notesForELisa = [
   new MovNotes(160, 0, canvasRef,'a','blue'),
   new MovNotes(760, 0, canvasRef,'d','orange'),
@@ -60,7 +59,7 @@ const MozartNotesDown = () => {
     ctx?.clearRect(0,0, ctx.canvas?.width, ctx.canvas?.height)
   }
     let animationFrameId: any;
-    const song = new Audio(`/src/MainSection/notes/ForElisa.mp3`);
+    const song = new Audio(`/src/MainSection/notes/MarchaTurca.mp3`);
     document.addEventListener("keydown", handleKeyDown, true);
     if(startGame) {
           song.play()

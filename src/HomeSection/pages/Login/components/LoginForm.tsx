@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const LoginForm: React.FC = () => {
+function LoginForm({onLogin}:any) {
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
@@ -20,11 +20,12 @@ const LoginForm: React.FC = () => {
       const dataUser = {
       'username' : response.data.username,
       'userId' : response.data.userId 
-    }
+      }
       localStorage.setItem('dataUser', JSON.stringify(dataUser))
       localStorage.setItem("token", token);
-     
-      navigate("/artri")
+      onLogin()
+      navigate("/artri/auth/home")
+      console.log(dataUser, token)
 
     }catch(err){
       console.error()
@@ -34,6 +35,7 @@ const LoginForm: React.FC = () => {
     }
     
   };
+  
 
 
 
@@ -74,7 +76,7 @@ const LoginForm: React.FC = () => {
       </Form.Item> */}
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button type="primary" htmlType="submit" className="login-form-button" >
           Ingresar
         </Button>
       </Form.Item>
