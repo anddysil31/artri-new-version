@@ -1,11 +1,12 @@
 import React from 'react'
-import MozartNotesDown from './GameComponents/Board/Mozart'
+import NotesMozartDown from './GameComponents/Board/NotesMozartDown'
+
 import { BallKeyboard } from './GameComponents/GameController/BallKeyboard'
 
 export default function MozartGame() {
   return (
     <div>
-        <MozartNotesDown/>
+        <NotesMozartDown />
         <BallKeyboard />
     </div>
   )

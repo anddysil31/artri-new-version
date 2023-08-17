@@ -6,16 +6,11 @@ import "./styles/NotesDown.css";
 import PlayerSaveData from "../PlayerStats/PlayerSaveData";
 import { PlayCircleOutlined } from "@ant-design/icons";
 
-let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
-if(newDataUser === null){
-  newDataUser = {
-  'username':'DefaultValue',
-  'userId':0
-  }
-}
-const ChopinNotesDown = () => {
-  const player = newDataUser.username
+
+const NotesChopinDown = () => {
+  let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
   const memberId = newDataUser.userId
+  const player = newDataUser.username
   const [score, setScore] = useState(0); // UseState for manage the score
   const [startGame, setStartGame] = useState(false) //Manage the start and end game
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -83,12 +78,23 @@ const ChopinNotesDown = () => {
    
       PlayerStats(ctx, player, canvas);
       animationFrameId = window.requestAnimationFrame(render);
+      window.addEventListener('blur', handleStopPlaying)
     };
+
+    const handleStopPlaying = () =>{
+      if(startGame){
+        song.pause()
+        setStartGame(false)
+      }
+    }
 
     render();
 }
     return () => {
       window.cancelAnimationFrame(animationFrameId);
+      {if(animationFrameId){
+        song.pause()
+      }}
       document.addEventListener("keydown", handleKeyDown, true);
     };
   }, [startGame]);
@@ -96,7 +102,7 @@ const ChopinNotesDown = () => {
   return (
     <div>
       <canvas ref={canvasRef} className="gameNotes" />
-      <PlayerSaveData score={score} songId={2} memberId={memberId} />
+      <PlayerSaveData score={score} songId={1} memberId={memberId} />
       {(!startGame)&&
       <button onClick={()=>setStartGame(true) } className='startButton'>
         <p className="startIcon"><PlayCircleOutlined /></p>
@@ -106,10 +112,10 @@ const ChopinNotesDown = () => {
   );
 };
 
-ChopinNotesDown.defaultProps = {
+NotesChopinDown.defaultProps = {
   width: 1000,
   height: 1000,
 };
 
 
-export default ChopinNotesDown;
+export default NotesChopinDown;

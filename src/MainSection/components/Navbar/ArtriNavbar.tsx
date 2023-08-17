@@ -4,12 +4,15 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import "./styles/ArtriNavbar.css";
 
 
+
 export default function ArtriNavbar({onLogout}:any) {
   const handleLogout = () =>{
     localStorage.removeItem('token');
     onLogout()
-   
   }
+
+  let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
+
   return (
     <div>
       
@@ -23,9 +26,8 @@ export default function ArtriNavbar({onLogout}:any) {
                   <li className='link-item-artri'><Link to = "/artri/auth/home"><HomeOutlined /></Link></li>
                   <li className='link-item-artri'><Link to = "/artri/auth/game"><PlayCircleOutlined /></Link></li>
                   <li className='link-item-artri'><Link to = "/artri/auth/repository"><MenuUnfoldOutlined /></Link></li>
-                  
                   <li className='link-item-artri'><Link to = "/artri/auth/statistics"><BarChartOutlined /></Link></li>
-                  <li className='link-item-artri'><Link to = "/artri/auth/settings"><SettingOutlined /></Link></li>
+                  <li className='link-item-artri'><Link to = "/artri/auth/admin/stats"><SettingOutlined /></Link></li>
                <li className='link-item-artri' ><Link to='/artri/home' onClick={handleLogout}><LogoutOutlined /></Link></li>
               </ul>
            

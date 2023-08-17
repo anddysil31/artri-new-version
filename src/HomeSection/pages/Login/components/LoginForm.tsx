@@ -17,12 +17,14 @@ function LoginForm({onLogin}:any) {
       const response = await axios.post("http://localhost:8081/api/v1/auth/authenticate",
       values);
       const token = response.data.token;
+      const memberRole = response.data.memberRole 
       const dataUser = {
       'username' : response.data.username,
-      'userId' : response.data.userId 
+      'userId' : response.data.userId,
       }
       localStorage.setItem('dataUser', JSON.stringify(dataUser))
       localStorage.setItem("token", token);
+      localStorage.setItem("role", memberRole)
       onLogin()
       navigate("/artri/auth/home")
       console.log(dataUser, token)

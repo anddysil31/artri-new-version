@@ -6,20 +6,16 @@ import "./styles/NotesDown.css";
 import PlayerSaveData from "../PlayerStats/PlayerSaveData";
 import { PlayCircleOutlined } from "@ant-design/icons";
 
-let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
-if(newDataUser === null){
-  newDataUser = {
-  'username':'DefaultValue',
-  'userId':0
-  }
-}
-const MozartNotesDown = () => {
-  const player = newDataUser.username
+
+const NotesMozartDown = () => {
+  let newDataUser = JSON.parse(localStorage.getItem('dataUser')!!)
   const memberId = newDataUser.userId
+  const player = newDataUser.username
   const [score, setScore] = useState(0); // UseState for manage the score
   const [startGame, setStartGame] = useState(false) //Manage the start and end game
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  console.log(newDataUser)
   const notesForELisa = [
   new MovNotes(160, 0, canvasRef,'a','blue'),
   new MovNotes(760, 0, canvasRef,'d','orange'),
@@ -82,12 +78,23 @@ const MozartNotesDown = () => {
    
       PlayerStats(ctx, player, canvas);
       animationFrameId = window.requestAnimationFrame(render);
+      window.addEventListener('blur', handleStopPlaying)
     };
+
+    const handleStopPlaying = () =>{
+      if(startGame){
+        song.pause()
+        setStartGame(false)
+      }
+    }
 
     render();
 }
     return () => {
       window.cancelAnimationFrame(animationFrameId);
+      {if(animationFrameId){
+        song.pause()
+      }}
       document.addEventListener("keydown", handleKeyDown, true);
     };
   }, [startGame]);
@@ -95,7 +102,7 @@ const MozartNotesDown = () => {
   return (
     <div>
       <canvas ref={canvasRef} className="gameNotes" />
-      <PlayerSaveData score={score} songId={3} memberId={memberId} />
+      <PlayerSaveData score={score} songId={1} memberId={memberId} />
       {(!startGame)&&
       <button onClick={()=>setStartGame(true) } className='startButton'>
         <p className="startIcon"><PlayCircleOutlined /></p>
@@ -105,10 +112,10 @@ const MozartNotesDown = () => {
   );
 };
 
-MozartNotesDown.defaultProps = {
+NotesMozartDown.defaultProps = {
   width: 1000,
   height: 1000,
 };
 
 
-export default MozartNotesDown;
+export default NotesMozartDown;

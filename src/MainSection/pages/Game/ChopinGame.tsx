@@ -1,12 +1,13 @@
 import React from 'react'
-import ChopinNotesDown from './GameComponents/Board/Chopin'
+import NotesChopinDown from './GameComponents/Board/NotesChopinDown'
+
 
 import { BallKeyboard } from './GameComponents/GameController/BallKeyboard'
 
 export default function ChopinGame() {
   return (
     <div>
-        <ChopinNotesDown />
+        <NotesChopinDown />
         <BallKeyboard />
     </div>
   )

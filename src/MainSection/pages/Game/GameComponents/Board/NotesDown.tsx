@@ -78,12 +78,23 @@ const NotesDown = () => {
    
       PlayerStats(ctx, player, canvas);
       animationFrameId = window.requestAnimationFrame(render);
+      window.addEventListener('blur', handleStopPlaying)
     };
+
+    const handleStopPlaying = () =>{
+      if(startGame){
+        song.pause()
+        setStartGame(false)
+      }
+    }
 
     render();
 }
     return () => {
       window.cancelAnimationFrame(animationFrameId);
+      {if(animationFrameId){
+        song.pause()
+      }}
       document.addEventListener("keydown", handleKeyDown, true);
     };
   }, [startGame]);
